@@ -17,12 +17,30 @@ struct client
 
 struct client clientrecord[max];
 
+void MainMenu()
+{
+    system("clear");
+    printf("=============================================\n");
+    printf("|     BANKING MANAGEMENT SYSTEM VER 1.0     |\n");
+    printf("=============================================\n");
+    printf("|  1. Add Account                           |\n");
+    printf("|  2. Edit Account                          |\n");
+    printf("|  3. Delete Account                        |\n");
+    printf("|  4. Recharge Money                        |\n");
+    printf("|  5. Withdraw Money                        |\n");
+    printf("|  6. Transfer Money                        |\n");
+    printf("|  7. Show list of all accounts             |\n");
+    printf("|  8. Save file                             |\n");
+    printf("=============================================\n\n");
+}
+
 void AddAcc()
 {
     int choice;
     char temp[20];
     int position;
 
+    system("clear");
     for (int i = 0; i < max; i++)
     {
         if (count_arr[i] == 0)
@@ -60,6 +78,7 @@ void EditAcc(int position)
     int choice;
     char temp[20];
 
+    system("clear");
     if (clientrecord[position].acc_no == position + 1)
     {
         printf("Which information do you want to edit?\n1. Edit all\n2. Name\n3. Gender\n4. Age\n5. Phone Number\nEnter your choice: ");
@@ -83,7 +102,6 @@ void EditAcc(int position)
 
             printf("Enter phone number: ");
             scanf("%s", clientrecord[position].phone_num);
-
             break;
 
         case 2:
@@ -122,7 +140,7 @@ void EditAcc(int position)
 void DeleteAcc(int position)
 {
     int choice;
-
+    system("clear");
     if (clientrecord[position].acc_no == position + 1)
     {
         printf("Are you sure? (Yes: 1 || No: 0): ");
@@ -138,30 +156,33 @@ void DeleteAcc(int position)
 void MoneyRecharge(int position)
 {
     long amount;
-    printf("How much: ");
+    system("clear");
+    printf("Enter your amount: ");
     scanf("%ld", &amount);
 
     clientrecord[position].balance += amount;
-    printf("\n");
+    printf("\nMoney recharged successfully!\n\n");
 }
 
 void MoneyWithdrawal(int position)
 {
     long amount;
-    printf("How much: ");
+    system("clear");
+    printf("Enter your amount: ");
     scanf("%ld", &amount);
 
     if (amount > clientrecord[position].balance)
         printf("\nInsufficient Money!\n");
     else
         clientrecord[position].balance -= amount;
-    printf("\n");
+    printf("\nMoney withdrawed successfully!\n\n");
 }
 
 void MoneyTransfer(int from, int to)
 {
     long amount;
-    printf("How much: ");
+    system("clear");
+    printf("Enter your amount: ");
     scanf("%ld", &amount);
 
     if (amount > clientrecord[from].balance)
@@ -182,12 +203,13 @@ void ShowInfoAccount(int position)
     printf("Gender: %s\n", clientrecord[position].gender);
     printf("Age: %d\n", clientrecord[position].age);
     printf("Phone Number: %s\n", clientrecord[position].phone_num);
-    printf("Balance: %ld\n\n\n", clientrecord[position].balance);
+    printf("Balance: %ld$\n\n\n", clientrecord[position].balance);
     printf("\n");
 }
 
 void ShowListOfAccount()
 {
+    system("clear");
     printf("==============================================\n");
     printf("|                ACCOUNT LIST                |\n");
     printf("==============================================\n");
@@ -210,25 +232,9 @@ void TextFile()
         fprintf(fptr, "Gender: %s\n", clientrecord[position].gender);
         fprintf(fptr, "Age: %d\n", clientrecord[position].age);
         fprintf(fptr, "Phone Number: %s\n", clientrecord[position].phone_num);
-        fprintf(fptr, "Balance: %ld\n", clientrecord[position].balance);
+        fprintf(fptr, "Balance: %ld$\n", clientrecord[position].balance);
         fprintf(fptr, "\n");
     }
     fclose(fptr);
-}
-
-void MainMenu()
-{
-    system("clear");
-    printf("=============================================\n");
-    printf("|     BANKING MANAGEMENT SYSTEM VER 1.0     |\n");
-    printf("=============================================\n");
-    printf("|  1. Add Account                           |\n");
-    printf("|  2. Edit Account                          |\n");
-    printf("|  3. Delete Account                        |\n");
-    printf("|  4. Recharge Money                        |\n");
-    printf("|  5. Withdraw Money                        |\n");
-    printf("|  6. Transfer Money                        |\n");
-    printf("|  7. Show list of all accounts             |\n");
-    printf("|  8. Save file                             |\n");
-    printf("=============================================\n\n");
+    printf("\nFile saved successfully!\n\n");
 }
